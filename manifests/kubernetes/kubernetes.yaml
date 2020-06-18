@@ -240,20 +240,4 @@ items:
         kind: Deployment
         name: "#{k8s.namespace}#-slave"
       targetCPUUtilizationPercentage: 75 # target CPU utilization
-    behavior:
-      scaleDown:
-        stabilizationWindowSeconds: 300
-        policies:
-        - type: Percent
-          value: 100
-          periodSeconds: 15
-      scaleUp:
-        stabilizationWindowSeconds: 0
-        policies:
-        - type: Percent
-          value: 100
-          periodSeconds: 15
-        - type: Pods
-          value: 10
-          periodSeconds: 15
-        selectPolicy: Max   
+    
