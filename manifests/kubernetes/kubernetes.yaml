@@ -239,5 +239,5 @@ items:
         apiVersion: apps/v1
         kind: Deployment
         name: "#{k8s.namespace}#-slave"
-      targetCPUUtilizationPercentage: 75 # target CPU utilization
+      targetCPUUtilizationPercentage: 50 # target CPU utilization
     
