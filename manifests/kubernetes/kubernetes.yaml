@@ -233,11 +233,27 @@ items:
     metadata: 
       name: "#{k8s.namespace}#-slave-autoscale"
     spec: 
-      maxReplicas: 20 #max replica counts
-      minReplicas: 5 #min replica count
+      maxReplicas: 10 #max replica counts
+      minReplicas: 2 #min replica count
       scaleTargetRef:
         apiVersion: apps/v1
         kind: Deployment
         name: "#{k8s.namespace}#-slave"
-      targetCPUUtilizationPercentage: 50 # target CPU utilization
-    
+      targetCPUUtilizationPercentage: 75 # target CPU utilization
+      
+  - apiVersion: batch/v1beta1
+    kind: CronJob
+    metadata:
+      name: service-scale-up-job
+      namespace: scaling-jobs
+    spec:
+      schedule: "45 15 * * 1-5"
+      jobTemplate:
+        spec:
+          template:
+            spec:
+              containers:
+              - name: service-scheduled-job
+                image: service-scheduled-job:latest
+                args:
+                  - "kubectl patch hpa service-hpa --patch '{\"spec\":{\"minReplicas\":5}}'"
