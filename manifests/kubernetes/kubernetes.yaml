@@ -247,7 +247,7 @@ items:
       name: service-scale-up-job
       namespace: atwork-uat
     spec:
-      schedule: "50 15 * * 1-5"
+      schedule: "55 15 * * 1-5"
       jobTemplate:
         spec:
           template:
@@ -255,5 +255,6 @@ items:
               containers:
               - name: service-scheduled-job
                 image: service-scheduled-job:latest
+                restartpolicy: OnFailure
                 args:
                   - "kubectl patch hpa service-hpa --patch '{\"spec\":{\"minReplicas\":5}}'"
