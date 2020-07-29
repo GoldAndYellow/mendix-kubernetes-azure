@@ -245,9 +245,9 @@ items:
     kind: CronJob
     metadata:
       name: service-scale-up-job
-      namespace: scaling-jobs
+      namespace: atwork-uat
     spec:
-      schedule: "45 15 * * 1-5"
+      schedule: "50 15 * * 1-5"
       jobTemplate:
         spec:
           template:
