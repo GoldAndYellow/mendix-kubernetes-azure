@@ -247,12 +247,14 @@ items:
       name: service-scale-up-job
       namespace: atwork1-uat
     spec:
-      schedule: "13 21 * * 1-5"
+      schedule: "15 21 * * 1-5"
       jobTemplate:
         spec:
           template:
             spec:
               containers:
-              - command:       
-                - "kubectl -n atwork1-uat patch hpa atwork1-uat-slave-autoscale --patch '{\"spec\":{\"minReplicas\":5}}'"
+              - name: "#{k8s.namespace}#-slave"
+                image: appuatmxregistry.azurecr.io/mendix/atwork1            
+                args:
+                  - "kubectl -n atwork1-uat patch hpa atwork1-uat-slave-autoscale --patch '{\"spec\":{\"minReplicas\":5}}'"
               restartPolicy: OnFailure
