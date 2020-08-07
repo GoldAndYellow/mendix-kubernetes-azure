@@ -247,7 +247,7 @@ items:
       name: service-scale-up-job
       namespace: atwork1-uat
     spec:
-      schedule: "32 20 * * 1-5"
+      schedule: "55 20 * * 1-5"
       jobTemplate:
         spec:
           template:
