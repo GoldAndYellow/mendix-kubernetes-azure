@@ -240,21 +240,4 @@ items:
         kind: Deployment
         name: "#{k8s.namespace}#-slave"
       targetCPUUtilizationPercentage: 75 # target CPU utilization
-      
-  - apiVersion: batch/v1beta1
-    kind: CronJob
-    metadata:
-      name: service-scale-up-job
-      namespace: atwork1-uat
-    spec:
-      schedule: "15 21 * * 1-5"
-      jobTemplate:
-        spec:
-          template:
-            spec:
-              containers:
-              - name: "#{k8s.namespace}#-slave"
-                image: appuatmxregistry.azurecr.io/mendix/atwork1            
-                args:
-                  - "kubectl -n atwork1-uat patch hpa atwork1-uat-slave-autoscale --patch '{\"spec\":{\"minReplicas\":5}}'"
-              restartPolicy: OnFailure
+ 
