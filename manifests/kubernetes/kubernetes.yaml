@@ -69,6 +69,10 @@ items:
             resources:
               requests:
                 memory: "#{k8s.memoryrequest_slave}#"
+                cpu: "#{k8s.cpurequest_slave}#"
+              limits:
+                memory: "#{k8s.memorylimit_slave}#"
+                cpu: "#{k8s.cpulimit_slave}#"
             env:
               - name: CF_INSTANCE_INDEX
                 value: "1"
@@ -150,24 +154,22 @@ items:
                httpGet:
                  path: /
                  port: 8080
-               initialDelaySeconds: 5
+               initialDelaySeconds: 120
                periodSeconds: 5
             readinessProbe:
                httpGet:
                  path: /
                  port: 8080
-               initialDelaySeconds: 5
+               initialDelaySeconds: 90
                periodSeconds: 5
                failureThreshold: 120 # high number to accomodate database synchronizations
-            startupProbe:
-               httpGet:
-                 path: /
-                 port: 8080
-               failureThreshold: 15
-               periodSeconds: 10
             resources:
               requests:
                 memory: "#{k8s.memoryrequest_leader}#"
+                cpu: "#{k8s.cpurequest_leader}#"
+              limits:
+                memory: "#{k8s.memorylimit_leader}#" 
+                cpu: "#{k8s.cpulimit_leader}#"
             env:
               - name: CF_INSTANCE_INDEX
                 value: "0"
