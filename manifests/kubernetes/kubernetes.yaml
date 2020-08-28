@@ -154,22 +154,24 @@ items:
                httpGet:
                  path: /
                  port: 8080
-               initialDelaySeconds: 120
+               initialDelaySeconds: 5
                periodSeconds: 5
             readinessProbe:
                httpGet:
                  path: /
                  port: 8080
-               initialDelaySeconds: 90
+               initialDelaySeconds: 5
                periodSeconds: 5
                failureThreshold: 120 # high number to accomodate database synchronizations
+            startupProbe:
+               httpGet:
+                 path: /
+                 port: 8080
+                failureThreshold: 15
+                periodSeconds: 10
             resources:
               requests:
                 memory: "#{k8s.memoryrequest_leader}#"
-                cpu: "#{k8s.cpurequest_leader}#"
-              limits:
-                memory: "#{k8s.memorylimit_leader}#" 
-                cpu: "#{k8s.cpulimit_leader}#"
             env:
               - name: CF_INSTANCE_INDEX
                 value: "0"
