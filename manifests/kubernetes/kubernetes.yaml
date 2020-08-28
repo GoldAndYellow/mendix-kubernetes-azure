@@ -163,8 +163,8 @@ items:
                httpGet:
                  path: /
                  port: 8080
-                failureThreshold: 15
-                periodSeconds: 10
+               failureThreshold: 15
+               periodSeconds: 10
             resources:
               requests:
                 memory: "#{k8s.memoryrequest_leader}#"
