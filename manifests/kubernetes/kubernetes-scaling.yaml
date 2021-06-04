@@ -1,3 +1,4 @@
+---
 apiVersion: "v1"
 kind: "List"
 items:
@@ -104,7 +105,7 @@ items:
       name: #{k8s.namespace}#-leader
       namespace: #{k8s.namespace}#
     spec:
-      replicas: 0 # tells deployment to run 1 pod matching the template - Changed to 0 from 1 for east Kubernetes cluster
+      replicas: 0 # tells deployment to run 1 pod matching the template - Changed to 0 from 1 for the east Kubernetes cluster
       selector:
         matchLabels:
             app: "#{k8s.namespace}#"
@@ -227,4 +228,3 @@ items:
       - name: http
         port: 80
         targetPort: 8080
- 
